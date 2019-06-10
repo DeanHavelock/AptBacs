@@ -1,3 +1,14 @@
 C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.csproj.CoreCompileInputs.cache
 C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.AssemblyInfoInputs.cache
 C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.AssemblyInfo.cs
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.deps.json
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.runtimeconfig.json
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.runtimeconfig.dev.json
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.dll
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.csprojAssemblyReference.cache
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.RazorAssemblyInfo.cache
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.RazorAssemblyInfo.cs
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.RazorTargetAssemblyInfo.cache
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.pdb
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.dll
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.pdb
