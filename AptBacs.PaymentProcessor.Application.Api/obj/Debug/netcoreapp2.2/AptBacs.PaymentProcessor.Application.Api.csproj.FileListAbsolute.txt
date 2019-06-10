@@ -1,0 +1,3 @@
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.csproj.CoreCompileInputs.cache
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.AssemblyInfoInputs.cache
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.AssemblyInfo.cs
