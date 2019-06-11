@@ -30,6 +30,7 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
         ///     }
         ///
         /// </remarks>
+        /// <param name="fileName">text, example 'sample.csv'</param>
         /// <param name="code">numeric, example '123'</param>
         /// <param name="name">text, example 'abc'</param>
         /// <param name="reference">text, example 'xyz'</param>
@@ -41,11 +42,11 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public ActionResult Post(int code, string name, string @reference, double amount)
+        public ActionResult Post(string fileName, int code, string name, string @reference, double amount)
         {
-            var makePaymentCommand = new MakePaymentApplicationCommand() { paymentRequestValueObjects = new List<PaymentRequestValueObject>() { new PaymentRequestValueObject() { Code=code,Name=name,Reference=@reference,Amount=amount } } };
+            var makePaymentCommand = new MakePaymentApplicationCommand() { FileName=fileName, PaymentRequestValueObjects = new List<PaymentRequestValueObject>() { new PaymentRequestValueObject() { Code=code,Name=name,Reference=@reference,Amount=amount } } };
             MakePayment(makePaymentCommand);
-            return CreatedAtRoute("Post Payment", new { code, name, @reference, amount }, new { PaymentId=0 });
+            return CreatedAtRoute("Post Payment", new { fileName, code, name, @reference, amount }, new { PaymentId=0 });
         }
 
         private void MakePayment(MakePaymentApplicationCommand makePaymentCommand)

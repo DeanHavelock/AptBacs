@@ -1,0 +1,22 @@
+﻿Transaction code,Name,DD Ref,Value
+01,Fred Bloggs,apt123,10.00
+01,Joe Bloggs,apt234,10.00
+01,Lyn Bloggs,apt345,10.00
+17,Fred Bloggs,apt123,10.00
+17,Joe Bloggs,apt234,10.00
+17,Lyn Bloggs,apt345,10.00
+18,Fred Bloggs,apt123,10.00
+18,Joe Bloggs,apt234,10.00
+18,Lyn Bloggs,apt345,10.00
+19,Fred Bloggs,apt123,10.00
+19,Joe Bloggs,apt234,10.00
+19,Lyn Bloggs,apt345,10.00
+0N,Fred Bloggs,apt123,10.00
+0N,Joe Bloggs,apt234,10.00
+0N,Lyn Bloggs,apt345,10.00
+0C,Fred Bloggs,apt123,10.00
+0C,Joe Bloggs,apt234,10.00
+0C,Lyn Bloggs,apt345,10.00
+0S,Fred Bloggs,apt123,10.00
+0S,Joe Bloggs,apt234,10.00
+0S,Lyn Bloggs,apt345,10.00

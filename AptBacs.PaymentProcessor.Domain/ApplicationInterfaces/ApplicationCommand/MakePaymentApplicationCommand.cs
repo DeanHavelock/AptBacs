@@ -7,9 +7,10 @@ namespace AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationComma
     {
         public MakePaymentApplicationCommand()
         {
-            paymentRequestValueObjects = new List<PaymentRequestValueObject>();
+            PaymentRequestValueObjects = new List<PaymentRequestValueObject>();
         }
 
-        public IEnumerable<PaymentRequestValueObject> paymentRequestValueObjects { get; set; }
+        public string FileName { get; set; }
+        public IEnumerable<PaymentRequestValueObject> PaymentRequestValueObjects { get; set; }
     }
 }

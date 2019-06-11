@@ -22,8 +22,8 @@ namespace AptBacs.PaymentProcessor.Application.Services
             //Initialize Domain Model
             PaymentRequest paymentRequestDomainModel = new PaymentRequest();
 
-            //Validate Business Logic on Domain Model using Domain Command
-            paymentRequestDomainModel.ValidateProcessPaymentRequest(processPaymentDomainCommand);
+            //Populate Domain Values, Validate Business Logic on Domain Model using Domain Command
+            paymentRequestDomainModel.ProcessPaymentRequest(processPaymentDomainCommand);
 
             //Use third party or internal api to transfer money between accounts
             ///var successfullyProcessedPayments = _transferMoneyService.ProcessPayments(new PaymentsDto(){...})

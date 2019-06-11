@@ -11,17 +11,19 @@ namespace AptBacs.PaymentProcessor.Domain.Models.Commands
 
         public static ProcessPaymentDomainCommand CreateFrom(MakePaymentApplicationCommand makePaymentApplicationCommand)
         {
-            var paymentRequestValueObjects = makePaymentApplicationCommand.paymentRequestValueObjects.ToList().Select(x => new PaymentRequestValueObject() { Code=x.Code, Name=x.Name, Reference=x.Reference, Amount=x.Amount});
+            var paymentRequestValueObjects = makePaymentApplicationCommand.PaymentRequestValueObjects.ToList().Select(x => new PaymentRequestValueObject() { Code=x.Code, Name=x.Name, Reference=x.Reference, Amount=x.Amount});
 
-            return new ProcessPaymentDomainCommand(paymentRequestValueObjects) { };
+            return new ProcessPaymentDomainCommand(makePaymentApplicationCommand.FileName, paymentRequestValueObjects) { };
         }
 
-        public ProcessPaymentDomainCommand(IEnumerable<PaymentRequestValueObject> paymentRequests)
+        public ProcessPaymentDomainCommand(string fileName, IEnumerable<PaymentRequestValueObject> paymentRequests)
         {
             PaymentRequests = paymentRequests ?? throw new NullReferenceException("At AptBacs.PaymentProcessor.Domain.Models.Commands.ProcessPaymentCommand ctor paymentRequests is null.");
+            FileName = fileName ?? throw new NullReferenceException("At AptBacs.PaymentProcessor.Domain.Models.Commands.ProcessPaymentCommand ctor input FileName is null.");
         }
 
         public int ProcessPaymentCommandId { get; set; }
+        public string FileName { get; set; }
         public IEnumerable<PaymentRequestValueObject> PaymentRequests { get;}
     }
 }

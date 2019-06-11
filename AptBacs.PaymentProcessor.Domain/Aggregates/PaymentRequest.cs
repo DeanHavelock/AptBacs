@@ -14,7 +14,7 @@ namespace AptBacs.PaymentProcessor.Domain.Models
             SuccessfulPayments = new List<SuccessfulPayment>();
             FailedPayments = new List<FailedPayment>();
             FraudCheckFlaggedOnHoldManualInterventionRequiredPayments = new List<FraudCheckFlaggedOnHoldManualInterventionRequiredPayment>();
-            _processPaymentDomainCommand = new ProcessPaymentDomainCommand(new List<PaymentRequestValueObject>() { });
+            _processPaymentDomainCommand = new ProcessPaymentDomainCommand("", new List<PaymentRequestValueObject>() { });
             Timestamp = DateTime.UtcNow;
         }
 
@@ -25,6 +25,8 @@ namespace AptBacs.PaymentProcessor.Domain.Models
         public int PaymentId { get; set; }
 
         public DateTime Timestamp { get; set; }
+        public string FileName { get; set; }
+
 
         public List<SuccessfulPayment> SuccessfulPayments { get; set; }
         public List<FailedPayment> FailedPayments { get; set; }
@@ -35,13 +37,15 @@ namespace AptBacs.PaymentProcessor.Domain.Models
         public double SuccessfullPaymentsTotal { get { return SuccessfulPayments.Sum(x => x.Amount); } set { SuccessfullPaymentsTotal = value; } }
         public double FailedPaymentsTotal { get { return FailedPayments.Sum(x => x.Amount); } set { SuccessfullPaymentsTotal = value; } }
         public double FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentsTotal { get { return FraudCheckFlaggedOnHoldManualInterventionRequiredPayments.Sum(x => x.Amount); } set { SuccessfullPaymentsTotal = value; } }
+        public double TotalValueOfPaymentsRequested { get { return SuccessfullPaymentsTotal + FailedPaymentsTotal + FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentsTotal; } set { TotalValueOfPaymentsRequested = value; } }
 
-        public void ValidateProcessPaymentRequest(ProcessPaymentDomainCommand processPaymentDomainCommand)
+        public void ProcessPaymentRequest(ProcessPaymentDomainCommand processPaymentDomainCommand)
         {
             var passingValidationRules = CheckPassingValidationRules(processPaymentDomainCommand);
             if (!passingValidationRules)
                 throw new Exception("AptBacs.PaymentProcessor.Domain.Models.PaymentRequest.AddProcessPaymentRequest() CheckPassingValidationRules(processPaymentCommand) -> failed validation checks");
 
+            FileName = processPaymentDomainCommand.FileName ?? throw new Exception("AptBacs.PaymentProcessor.Domain.Models.PaymentRequest.AddProcessPaymentRequest() -> received FileName was null");
             _processPaymentDomainCommand = processPaymentDomainCommand;
         }
 

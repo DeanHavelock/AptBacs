@@ -10,6 +10,7 @@ namespace AptBacs.PaymentProcessor.Tests.Application.IntegrationTests
         public void Given_ValidApiValues_When_SubmittedToPaymentApiForProcessing_Then_PaymentRecorded()
         {
             //Setup valid test request values
+            string fileName = "sample.csv";
             int code = 1;
             string name = "abc";
             string reference = "xyz";
@@ -18,7 +19,7 @@ namespace AptBacs.PaymentProcessor.Tests.Application.IntegrationTests
             //Setup endpoint test values
             string baseAddress = "https://localhost:44399";
             string endpointAddress = "/api/Payment";
-            string addressPostValues = "?code=" + code + "&name=" + name + "&reference=" + reference + "&amount=" + amount;
+            string addressPostValues = "?fileName=" + fileName + "&code=" + code + "&name=" + name + "&reference=" + reference + "&amount=" + amount;
 
             //Setup Http Request to Post Payment Test Endpoint:
             HttpClient httpClient = new HttpClient
