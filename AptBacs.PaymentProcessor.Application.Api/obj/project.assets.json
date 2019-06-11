@@ -4784,6 +4784,42 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "AptBacs.PaymentProcessor.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "AptBacs.PaymentProcessor.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AptBacs.PaymentProcessor.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AptBacs.PaymentProcessor.Application.dll": {}
+        }
+      },
+      "AptBacs.PaymentProcessor.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/AptBacs.PaymentProcessor.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AptBacs.PaymentProcessor.Domain.dll": {}
+        }
+      },
+      "AptBacs.PaymentProcessor.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "AptBacs.PaymentProcessor.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AptBacs.PaymentProcessor.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AptBacs.PaymentProcessor.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -13100,10 +13136,28 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "AptBacs.PaymentProcessor.Application/1.0.0": {
+      "type": "project",
+      "path": "../AptBacs.PaymentProcessor.Application/AptBacs.PaymentProcessor.Application.csproj",
+      "msbuildProject": "../AptBacs.PaymentProcessor.Application/AptBacs.PaymentProcessor.Application.csproj"
+    },
+    "AptBacs.PaymentProcessor.Domain/1.0.0": {
+      "type": "project",
+      "path": "../AptBacs.PaymentProcessor.Domain/AptBacs.PaymentProcessor.Domain.csproj",
+      "msbuildProject": "../AptBacs.PaymentProcessor.Domain/AptBacs.PaymentProcessor.Domain.csproj"
+    },
+    "AptBacs.PaymentProcessor.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../AptBacs.PaymentProcessor.Infrastructure/AptBacs.PaymentProcessor.Infrastructure.csproj",
+      "msbuildProject": "../AptBacs.PaymentProcessor.Infrastructure/AptBacs.PaymentProcessor.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "AptBacs.PaymentProcessor.Application >= 1.0.0",
+      "AptBacs.PaymentProcessor.Domain >= 1.0.0",
+      "AptBacs.PaymentProcessor.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
@@ -13144,7 +13198,17 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj": {
+              "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj"
+            },
+            "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj": {
+              "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj"
+            },
+            "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

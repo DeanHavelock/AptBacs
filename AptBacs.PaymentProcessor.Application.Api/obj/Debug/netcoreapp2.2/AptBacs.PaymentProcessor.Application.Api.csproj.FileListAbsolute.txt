@@ -14,3 +14,10 @@ C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj
 C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.pdb
 C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.xml
 C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.xml
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.dll
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Domain.dll
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Infrastructure.dll
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.pdb
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Domain.pdb
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\bin\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Infrastructure.pdb
+C:\Users\DeanH\source\repos\AptBacs\AptBacs.PaymentProcessor.Application.Api\obj\Debug\netcoreapp2.2\AptBacs.PaymentProcessor.Application.Api.csproj.CopyComplete

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using AptBacs.PaymentProcessor.Application.Services;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces;
+using AptBacs.PaymentProcessor.Domain.RepositoryInterfaces;
+using AptBacs.PaymentProcessor.Infrastructure.Repositories.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +26,15 @@ namespace AptBacs.PaymentProcessor.Application.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            RegisterDependencyInjectionInstances(services);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             RegisterSwaggerApiDocsGenerator(services);   
+        }
+
+        private void RegisterDependencyInjectionInstances(IServiceCollection services)
+        {
+            services.Add(new ServiceDescriptor(typeof(IProcessBacsPaymentService), typeof(ProcessBacsPaymentService), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IPaymentRequestRepository), typeof(PaymentRequestRepository), ServiceLifetime.Singleton));
         }
 
         private void RegisterSwaggerApiDocsGenerator(IServiceCollection services)
@@ -74,7 +85,7 @@ namespace AptBacs.PaymentProcessor.Application.Api
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AptBacs Payment Api V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AptBacs Payment Api - V1");
                 c.RoutePrefix = string.Empty;
             });
         }

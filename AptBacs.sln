@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AptBacs.PaymentProcessor.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AptBacs.PaymentProcessor.Tests.Application", "AptBacs.PaymentProcessor.Tests.Application\AptBacs.PaymentProcessor.Tests.Application.csproj", "{43D433A8-C816-458D-BD1F-615EC457491C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AptBacs.PaymentProcessor.Application", "AptBacs.PaymentProcessor.Application\AptBacs.PaymentProcessor.Application.csproj", "{1DC62E2C-4C1B-4147-A29A-EB81498B23FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AptBacs.PaymentProcessor.Domain", "AptBacs.PaymentProcessor.Domain\AptBacs.PaymentProcessor.Domain.csproj", "{6257797B-38A8-4DA2-A728-BDFD3891ED05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AptBacs.PaymentProcessor.Infrastructure", "AptBacs.PaymentProcessor.Infrastructure\AptBacs.PaymentProcessor.Infrastructure.csproj", "{66C2EDC6-0741-4CB8-BFB1-9CD422D4F505}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{43D433A8-C816-458D-BD1F-615EC457491C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43D433A8-C816-458D-BD1F-615EC457491C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43D433A8-C816-458D-BD1F-615EC457491C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC62E2C-4C1B-4147-A29A-EB81498B23FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC62E2C-4C1B-4147-A29A-EB81498B23FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC62E2C-4C1B-4147-A29A-EB81498B23FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC62E2C-4C1B-4147-A29A-EB81498B23FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6257797B-38A8-4DA2-A728-BDFD3891ED05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6257797B-38A8-4DA2-A728-BDFD3891ED05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6257797B-38A8-4DA2-A728-BDFD3891ED05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6257797B-38A8-4DA2-A728-BDFD3891ED05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66C2EDC6-0741-4CB8-BFB1-9CD422D4F505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C2EDC6-0741-4CB8-BFB1-9CD422D4F505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C2EDC6-0741-4CB8-BFB1-9CD422D4F505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C2EDC6-0741-4CB8-BFB1-9CD422D4F505}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

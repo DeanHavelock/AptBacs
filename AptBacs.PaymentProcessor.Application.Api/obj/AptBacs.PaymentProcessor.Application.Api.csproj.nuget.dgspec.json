@@ -31,7 +31,17 @@
         },
         "frameworks": {
           "netcoreapp2.2": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj": {
+                "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj"
+              },
+              "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj": {
+                "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj"
+              },
+              "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -71,6 +81,176 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[4.0.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj",
+        "projectName": "AptBacs.PaymentProcessor.Application",
+        "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\AptBacs.PaymentProcessor.Application.csproj",
+        "packagesPath": "C:\\Users\\DeanH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\DeanH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj": {
+                "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj",
+        "projectName": "AptBacs.PaymentProcessor.Domain",
+        "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj",
+        "packagesPath": "C:\\Users\\DeanH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\DeanH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj",
+        "projectName": "AptBacs.PaymentProcessor.Infrastructure",
+        "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\AptBacs.PaymentProcessor.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\DeanH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\DeanH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj": {
+                "projectPath": "C:\\Users\\DeanH\\source\\repos\\AptBacs\\AptBacs.PaymentProcessor.Domain\\AptBacs.PaymentProcessor.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
             }
           },
           "imports": [

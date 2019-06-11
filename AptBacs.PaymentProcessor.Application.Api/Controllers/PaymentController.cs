@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand.ValueObjects;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace AptBacs.PaymentProcessor.Application.Api.Controllers
 {
@@ -6,6 +10,12 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
+        private readonly IProcessBacsPaymentService _processBacsPaymentService;
+
+        public PaymentController(IProcessBacsPaymentService processBacsPaymentService)
+        {
+            _processBacsPaymentService = processBacsPaymentService;
+        }
 
         /// <summary>
         /// Process and validates the file to be saved body: code: number, name: string, reference: string, amount: amount required: true produces: - application/json responses: '200': description: OK schema: $ref: '#/definitions/Submission' definitions: FileResponse: type: object required: filename totalLinesRead properties: filename: type: string totalLinesRead: type: number
@@ -33,7 +43,14 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
         [ProducesResponseType(400)]
         public ActionResult Post(int code, string name, string @reference, double amount)
         {
+            var makePaymentCommand = new MakePaymentApplicationCommand() { paymentRequestValueObjects = new List<PaymentRequestValueObject>() { new PaymentRequestValueObject() { Code=code,Name=name,Reference=@reference,Amount=amount } } };
+            MakePayment(makePaymentCommand);
             return CreatedAtRoute("Post Payment", new { code, name, @reference, amount }, new { PaymentId=0 });
+        }
+
+        private void MakePayment(MakePaymentApplicationCommand makePaymentCommand)
+        {
+            _processBacsPaymentService.Pay(makePaymentCommand);
         }
 
     }
