@@ -33,6 +33,7 @@ namespace AptBacs.PaymentProcessor.Application.Api
 
         private void RegisterDependencyInjectionInstances(IServiceCollection services)
         {
+            services.Add(new ServiceDescriptor(typeof(IBacsPaymentQueryService), typeof(BacsPaymentQueryService), ServiceLifetime.Transient));
             services.Add(new ServiceDescriptor(typeof(IProcessBacsPaymentService), typeof(ProcessBacsPaymentService), ServiceLifetime.Transient));
             services.Add(new ServiceDescriptor(typeof(IPaymentRequestRepository), typeof(PaymentRequestRepository), ServiceLifetime.Singleton));
         }

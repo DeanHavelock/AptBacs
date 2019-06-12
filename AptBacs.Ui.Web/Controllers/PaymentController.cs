@@ -5,70 +5,95 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand.ValueObjects;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationReadModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AptBacs.Ui.Web.Controllers
 {
-    public class UploadFilesController : Controller
+    public class PaymentController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        public IActionResult Index()
+        {
+            //Setup endpoint values
+            string baseAddress = "https://localhost:44399";
+            string endpointAddress = "/api/Payment";
 
-        [HttpPost("UploadFiles")]
+            HttpClient httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(baseAddress)
+            };
+            var response = httpClient.GetAsync(endpointAddress).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            //Read response content result into string variable
+            var strJson = response.Content.ReadAsStringAsync().Result;
+            //Deserialize the string (Json format) to strongly typed object
+            var paymentRequestsForUserReadModel = JsonConvert.DeserializeObject<PaymentRequestsForUserReadModel>(strJson);
+
+            return View(paymentRequestsForUserReadModel);
+        }
+
+        [HttpPost("Payment")]
         public async Task<IActionResult> Post(List<IFormFile> files)
         {
             long size = files.Sum(f => f.Length);
 
             // full path to file in temp location
             var filePath = Path.GetTempFileName();
-            List<string> dataFileContentList = new List<string>();
 
+            List<KeyValuePair<string,string>> dataFileContentList = new List<KeyValuePair<string, string>>();
+            List<string> dataFileNameList = new List<string>();
             foreach (var formFile in files)
             {
+                var fileName = formFile.FileName.Split("\\").Last();
                 if (formFile.Length > 0)
                 {
-                    dataFileContentList.Add(/*await*/ReadFileData(formFile));
+                    dataFileContentList.Add(/*await*/new KeyValuePair<string, string>(fileName, ReadFileData(formFile)));
                 }
             }
 
             foreach (var dataFileContent in dataFileContentList)
             {
-                var dataFileContentRecords = CleanFileData(dataFileContent);
+                var dataFileContentRecords = CleanFileData(dataFileContent.Value);
 
                 //validations
                 ///ToDo: Add file data validation (not business logic) to make sure that there are no unexpected values in the serialized data, for example letters in the amount field throughout all records, throw exception if we have received incorrect data.
 
+                MakePaymentApplicationCommand makePaymentApplicationCommand = new MakePaymentApplicationCommand();
+                makePaymentApplicationCommand.FileName = dataFileContent.Key;
+
                 foreach (var dataFileContentRecord in dataFileContentRecords)
                 {
                     var dataFileContentRecordValues = dataFileContentRecord.Split(",");
-                    //send object model to api for payment processing (https)
-                    //Setup request values from dataFileContent
-                    string fileName = "sample.csv";
-                    int code = Convert.ToInt32(dataFileContentRecordValues[0]);
+                    string code = dataFileContentRecordValues[0].ToString();
                     string name = dataFileContentRecordValues[1].ToString();
                     string reference = dataFileContentRecordValues[2].ToString();
                     double amount = Convert.ToDouble(dataFileContentRecordValues[3]);
-
-                    //Setup endpoint values
-                    string baseAddress = "https://localhost:44399";
-                    string endpointAddress = "/api/Payment";
-                    string addressPostValues = "?fileName=" + fileName + "&code=" + code + "&name=" + name + "&reference=" + reference + "&amount=" + amount;
-
-                    HttpClient httpClient = new HttpClient
-                    {
-                        BaseAddress = new Uri(baseAddress)
-                    };
-                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, baseAddress)
-                    {
-                        RequestUri = new Uri(baseAddress + endpointAddress + addressPostValues)
-                    };
-                    await httpClient.SendAsync(requestMessage);
+                    makePaymentApplicationCommand.PaymentRequestValueObjects.Add(new PaymentRequestValueObject(){ Code=code, Name=name, Reference=reference, Amount=amount });
                 }
+
+                //Setup endpoint values
+                string baseAddress = "https://localhost:44399";
+                string endpointAddress = "/api/Payment";
+                
+                HttpClient httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri(baseAddress)
+                };
+                await httpClient.PostAsJsonAsync(endpointAddress, makePaymentApplicationCommand);
+
             }
-            return Ok(new { count = files.Count, size, filePath });
+            //return Ok(new { count = files.Count, size, filePath });
+            return RedirectToAction("Index");
         }
 
         private List<string> CleanFileData(string dataFileContent)

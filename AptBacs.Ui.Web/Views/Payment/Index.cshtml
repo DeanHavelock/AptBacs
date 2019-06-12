@@ -1,0 +1,211 @@
+﻿@model AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationReadModel.PaymentRequestsForUserReadModel
+
+@{
+    ViewData["Title"] = "Payment Requests for User:";
+}
+<h1>Submit New Payment Request</h1>
+    <form method="post" enctype="multipart/form-data" asp-controller="Payment" asp-action="Post">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Upload one or more files using this form:</p>
+                <input type="file" name="files" multiple>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload">
+            </div>
+        </div>
+    </form>
+
+<h1>Payments Submitted by User:</h1>
+
+<div>
+
+    @{
+        foreach (var paymentRequestsForUser in Model.PaymentRequestsForUser)
+        {
+            <h4>Submitted Payment Request</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => paymentRequestsForUser.PaymentRequestId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => paymentRequestsForUser.PaymentRequestId)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => paymentRequestsForUser.FileName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => paymentRequestsForUser.FileName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => paymentRequestsForUser.Timestamp)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => paymentRequestsForUser.Timestamp)
+                </dd>
+            </dl>
+
+
+            <div class="container">
+                <h2>Successful Payments</h2>
+                @{
+                    if (!paymentRequestsForUser.SuccessfulPayments.Any())
+                    {
+                        <dt>Successful Payments:</dt>
+                        <dd>None</dd>
+                    }
+                }
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>SuccessfulPaymentId</th>
+                            <th>PaymentRequestId</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Reference</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var successfullPayment in paymentRequestsForUser.SuccessfulPayments)
+                            {
+                                <tr>
+                                    <td>@successfullPayment.SuccessfulPaymentId</td>
+                                    <td>@successfullPayment.PaymentRequestId</td>
+                                    <td>@successfullPayment.Code</td>
+                                    <td>@successfullPayment.Name</td>
+                                    <td>@successfullPayment.Reference</td>
+                                    <td>@successfullPayment.Amount</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => paymentRequestsForUser.SuccessfullPaymentsTotal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => paymentRequestsForUser.SuccessfullPaymentsTotal)
+            </dd>
+
+            <div class="container">
+                <h2>Failed Payments</h2>
+                @{
+                    if (!paymentRequestsForUser.FailedPayments.Any())
+                    {
+                        <dt>Failed Payments:</dt>
+                        <dd>None</dd>
+                    }
+                }
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>FailedPaymentId</th>
+                            <th>PaymentRequestId</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Reference</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var payment in paymentRequestsForUser.FailedPayments)
+                            {
+                                <tr>
+                                    <td>@payment.FailedPaymentId</td>
+                                    <td>@payment.PaymentRequestId</td>
+                                    <td>@payment.Code</td>
+                                    <td>@payment.Name</td>
+                                    <td>@payment.Reference</td>
+                                    <td>@payment.Amount</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => paymentRequestsForUser.FailedPaymentsTotal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => paymentRequestsForUser.FailedPaymentsTotal)
+            </dd>
+
+
+            <div class="container">
+                <h2>
+                    Fraud Flagged on Hold, Manual Check Payments
+                    <button class="btn btn-outline-danger btn-warning">Process Checked Payments</button>
+                </h2>
+                @{
+                    if (!paymentRequestsForUser.FraudCheckFlaggedOnHoldManualInterventionRequiredPayments.Any())
+                    {
+                        <dt>Fraud Flagged on Hold Payments:</dt>
+                        <dd>None</dd>
+                    }
+                }
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentId</th>
+                            <th>PaymentRequestId</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Reference</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var payment in paymentRequestsForUser.FraudCheckFlaggedOnHoldManualInterventionRequiredPayments)
+                            {
+                                <tr>
+                                    <td>@payment.FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentId</td>
+                                    <td>@payment.PaymentRequestId</td>
+                                    <td>@payment.Code</td>
+                                    <td>@payment.Name</td>
+                                    <td>@payment.Reference</td>
+                                    <td>@payment.Amount</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => paymentRequestsForUser.FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentsTotal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => paymentRequestsForUser.FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentsTotal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => paymentRequestsForUser.TotalValueOfPaymentsRequested)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => paymentRequestsForUser.TotalValueOfPaymentsRequested)
+            </dd>
+
+        }
+    }
+</div>
+<div>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    <a asp-action="Index">Refresh</a>
+</div>

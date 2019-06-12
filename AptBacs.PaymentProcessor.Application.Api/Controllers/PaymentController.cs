@@ -1,52 +1,35 @@
 ﻿using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces;
 using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand;
-using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand.ValueObjects;
+using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationReadModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace AptBacs.PaymentProcessor.Application.Api.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : ControllerBase
     {
         private readonly IProcessBacsPaymentService _processBacsPaymentService;
+        private readonly IBacsPaymentQueryService _bacsPaymentQueryService;
 
-        public PaymentController(IProcessBacsPaymentService processBacsPaymentService)
+        public PaymentController(IProcessBacsPaymentService processBacsPaymentService, IBacsPaymentQueryService bacsPaymentQueryService)
         {
             _processBacsPaymentService = processBacsPaymentService;
+            _bacsPaymentQueryService = bacsPaymentQueryService;
         }
-
-        /// <summary>
-        /// Process and validates the file to be saved body: code: number, name: string, reference: string, amount: amount required: true produces: - application/json responses: '200': description: OK schema: $ref: '#/definitions/Submission' definitions: FileResponse: type: object required: filename totalLinesRead properties: filename: type: string totalLinesRead: type: number
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /Payment
-        ///     {
-        ///        "fileName": sample.csv,
-        ///        "totalLinesRead": "100",
-        ///     }
-        ///
-        /// </remarks>
-        /// <param name="fileName">text, example 'sample.csv'</param>
-        /// <param name="code">numeric, example '123'</param>
-        /// <param name="name">text, example 'abc'</param>
-        /// <param name="reference">text, example 'xyz'</param>
-        /// <param name="amount">decimal, example '50000.00'</param>
-        /// <returns>A newly created PaymentId</returns>
-        /// <response code="201">Returns the Id of the newly created item</response>
-        /// <response code="400">Returns Bad Request Error</response>        
-        // POST api/Payment    
+  
+        //[Authorize]
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public ActionResult Post(string fileName, int code, string name, string @reference, double amount)
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        public ActionResult Post([FromBody]MakePaymentApplicationCommand makePaymentApplicationCommand)
         {
-            var makePaymentCommand = new MakePaymentApplicationCommand() { FileName=fileName, PaymentRequestValueObjects = new List<PaymentRequestValueObject>() { new PaymentRequestValueObject() { Code=code,Name=name,Reference=@reference,Amount=amount } } };
-            MakePayment(makePaymentCommand);
-            return CreatedAtRoute("Post Payment", new { fileName, code, name, @reference, amount }, new { PaymentId=0 });
+            MakePayment(makePaymentApplicationCommand);
+            return Ok(new { fileName="", code="", name="", @reference="", amount="##", PaymentRequestId="#" });
         }
 
         private void MakePayment(MakePaymentApplicationCommand makePaymentCommand)
@@ -54,5 +37,21 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
             _processBacsPaymentService.Pay(makePaymentCommand);
         }
 
+        //[Authorize]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
+        [HttpGet]
+        public JsonResult Get(int userId)
+        {
+            var paymentRequestsForUserReadModel = GetPaymentsForUser(userId);
+            return new JsonResult(paymentRequestsForUserReadModel);
+        }
+
+        private PaymentRequestsForUserReadModel GetPaymentsForUser(int userId)
+        {
+            return _bacsPaymentQueryService.Get(userId);
+        }
     }
 }

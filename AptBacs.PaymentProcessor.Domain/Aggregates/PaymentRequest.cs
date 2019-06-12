@@ -22,7 +22,7 @@ namespace AptBacs.PaymentProcessor.Domain.Models
         ///For Domain Event Publish
         //private ProcessedPaymentEvent _processedPaymentEvent { get { return new ProcessedPaymentEvent(SuccessfulPayments, FailedPayments, FraudCheckFlaggedOnHoldManualInterventionRequiredPayments); } }
 
-        public int PaymentId { get; set; }
+        public int PaymentRequestId { get; set; }
 
         public DateTime Timestamp { get; set; }
         public string FileName { get; set; }

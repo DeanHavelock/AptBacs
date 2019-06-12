@@ -11,6 +11,6 @@ namespace AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationComma
         }
 
         public string FileName { get; set; }
-        public IEnumerable<PaymentRequestValueObject> PaymentRequestValueObjects { get; set; }
+        public List<PaymentRequestValueObject> PaymentRequestValueObjects { get; set; }
     }
 }
