@@ -15,6 +15,7 @@ namespace AptBacs.PaymentProcessor.Tests.Application.IntegrationTests
         [Fact]
         public void Given_ValidApiValues_When_SubmittedToPaymentApiForProcessing_Then_PaymentRecorded()
         {
+            //Setup Test Data:
             MakePaymentApplicationCommand makePaymentApplicationCommand = new MakePaymentApplicationCommand();
             makePaymentApplicationCommand.FileName = "sample.csv";
 
@@ -27,7 +28,7 @@ namespace AptBacs.PaymentProcessor.Tests.Application.IntegrationTests
                 makePaymentApplicationCommand.PaymentRequestValueObjects.Add(new PaymentRequestValueObject() { Code = code, Name = name, Reference = reference, Amount = amount });
             }
 
-            //Setup endpoint values
+            //Setup endpoint values:
             string baseAddress = "https://localhost:44399";
             string endpointAddress = "/api/Payment";
 
