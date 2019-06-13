@@ -36,6 +36,7 @@ namespace AptBacs.PaymentProcessor.Infrastructure.Repositories.InMemory
                 var newIdentityValue = _paymentRequests.Sum(p => p.FailedPayments.Count()) + 1 + runningTotal;
                 failedPayment.FailedPaymentId = newIdentityValue;
                 failedPayment.PaymentRequestId = paymentRequestId;
+                runningTotal++;
             }
             runningTotal = 0;
             foreach (var fraudCheckFlaggedOnHoldManualInterventionRequiredPayment in paymentRequest.FraudCheckFlaggedOnHoldManualInterventionRequiredPayments)
@@ -43,6 +44,7 @@ namespace AptBacs.PaymentProcessor.Infrastructure.Repositories.InMemory
                 var newIdentityValue = _paymentRequests.Sum(p => p.FraudCheckFlaggedOnHoldManualInterventionRequiredPayments.Count()) + 1 + runningTotal;
                 fraudCheckFlaggedOnHoldManualInterventionRequiredPayment.FraudCheckFlaggedOnHoldManualInterventionRequiredPaymentId = newIdentityValue;
                 fraudCheckFlaggedOnHoldManualInterventionRequiredPayment.PaymentRequestId = paymentRequestId;
+                runningTotal++;
             }
 
             //Save Record to Memory:
