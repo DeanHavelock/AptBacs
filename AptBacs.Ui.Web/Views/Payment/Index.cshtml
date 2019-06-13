@@ -25,7 +25,7 @@
     @{
         foreach (var paymentRequestsForUser in Model.PaymentRequestsForUser)
         {
-            <h4>Submitted Payment Request</h4>
+            <h2>Submitted Payment Request</h2>
             <hr />
             <dl class="row">
                 <dt class="col-sm-2">
@@ -44,7 +44,8 @@
                     @Html.DisplayNameFor(model => paymentRequestsForUser.Timestamp)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => paymentRequestsForUser.Timestamp)
+                    @{var timestamp = paymentRequestsForUser.Timestamp.ToString("dd/MM/yyyy HH:mm:ss");}
+                    @Html.DisplayFor(model => timestamp)
                 </dd>
             </dl>
 

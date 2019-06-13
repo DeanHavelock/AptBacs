@@ -3,6 +3,7 @@ using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationCommand;
 using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationReadModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace AptBacs.PaymentProcessor.Application.Api.Controllers
 {
@@ -46,6 +47,7 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
         public JsonResult Get(int userId)
         {
             var paymentRequestsForUserReadModel = GetPaymentsForUser(userId);
+            paymentRequestsForUserReadModel.PaymentRequestsForUser = paymentRequestsForUserReadModel.PaymentRequestsForUser.OrderByDescending(x => x.PaymentRequestId).ToList();
             return new JsonResult(paymentRequestsForUserReadModel);
         }
 

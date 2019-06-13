@@ -3,6 +3,7 @@ using AptBacs.PaymentProcessor.Domain.Models.Commands;
 using AptBacs.PaymentProcessor.Domain.Models.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace AptBacs.PaymentProcessor.Domain.Models
@@ -15,7 +16,7 @@ namespace AptBacs.PaymentProcessor.Domain.Models
             FailedPayments = new List<FailedPayment>();
             FraudCheckFlaggedOnHoldManualInterventionRequiredPayments = new List<FraudCheckFlaggedOnHoldManualInterventionRequiredPayment>();
             _processPaymentDomainCommand = new ProcessPaymentDomainCommand("", new List<PaymentRequestValueObject>() { });
-            Timestamp = DateTime.UtcNow;
+            Timestamp = DateTime.Now;
         }
 
         private ProcessPaymentDomainCommand _processPaymentDomainCommand { get; set; }
