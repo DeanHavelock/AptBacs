@@ -29,7 +29,7 @@ namespace AptBacs.PaymentProcessor.Application.Api.Controllers
         public ActionResult Post([FromBody]MakePaymentApplicationCommand makePaymentApplicationCommand)
         {
             MakePayment(makePaymentApplicationCommand);
-            return Ok(new { fileName="", code="", name="", @reference="", amount="##", PaymentRequestId="#" });
+            return Ok();
         }
 
         private void MakePayment(MakePaymentApplicationCommand makePaymentCommand)
