@@ -1,9 +1,9 @@
 ﻿using AptBacs.PaymentProcessor.Domain.Aggregates.Models;
+using AptBacs.PaymentProcessor.Domain.Aggregates.ValueObjects;
 using AptBacs.PaymentProcessor.Domain.Models.Commands;
 using AptBacs.PaymentProcessor.Domain.Models.ValueObjects;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace AptBacs.PaymentProcessor.Domain.Models
@@ -12,8 +12,10 @@ namespace AptBacs.PaymentProcessor.Domain.Models
     {
         public PaymentRequest()
         {
+            PassedInternalChecksReadyToTakePayments = new List<PassedInternalChecksReadyToTakePayment>();
             SuccessfulPayments = new List<SuccessfulPayment>();
             FailedPayments = new List<FailedPayment>();
+            InternalValidationFailedPayments = new List<InternalValidationFailedPayment>();
             FraudCheckFlaggedOnHoldManualInterventionRequiredPayments = new List<FraudCheckFlaggedOnHoldManualInterventionRequiredPayment>();
             _processPaymentDomainCommand = new ProcessPaymentDomainCommand("", new List<PaymentRequestValueObject>() { });
             Timestamp = DateTime.Now;
@@ -28,9 +30,13 @@ namespace AptBacs.PaymentProcessor.Domain.Models
         public DateTime Timestamp { get; set; }
         public string FileName { get; set; }
 
+        //Value Objects
+        public List<PassedInternalChecksReadyToTakePayment> PassedInternalChecksReadyToTakePayments { get; set; }
 
+        //Entities
         public List<SuccessfulPayment> SuccessfulPayments { get; set; }
         public List<FailedPayment> FailedPayments { get; set; }
+        public List<InternalValidationFailedPayment> InternalValidationFailedPayments { get; set; }
         public List<FraudCheckFlaggedOnHoldManualInterventionRequiredPayment> FraudCheckFlaggedOnHoldManualInterventionRequiredPayments { get; set; }
 
 
@@ -43,33 +49,40 @@ namespace AptBacs.PaymentProcessor.Domain.Models
         public void ProcessPaymentRequest(ProcessPaymentDomainCommand processPaymentDomainCommand)
         {
             var passingValidationRules = CheckPassingValidationRules(processPaymentDomainCommand);
-            if (!passingValidationRules)
+            if (!passingValidationRules.Any())
                 throw new Exception("AptBacs.PaymentProcessor.Domain.Models.PaymentRequest.AddProcessPaymentRequest() CheckPassingValidationRules(processPaymentCommand) -> failed validation checks");
 
             FileName = processPaymentDomainCommand.FileName ?? throw new Exception("AptBacs.PaymentProcessor.Domain.Models.PaymentRequest.AddProcessPaymentRequest() -> received FileName was null");
             _processPaymentDomainCommand = processPaymentDomainCommand;
         }
 
-        private bool CheckPassingValidationRules(ProcessPaymentDomainCommand processPaymentCommand)
+        private List<PassedInternalChecksReadyToTakePayment> CheckPassingValidationRules(ProcessPaymentDomainCommand processPaymentCommand)
         {
-            var hasPassedValidationCheckResult = false;
             if (processPaymentCommand == null || processPaymentCommand.PaymentRequests == null || !processPaymentCommand.PaymentRequests.ToList().Any())
-                return hasPassedValidationCheckResult;
+                return new List<PassedInternalChecksReadyToTakePayment>();
 
             //checking validation logic:
             // - Minimum amount is £1.00.
             // - Maximum amount is £20,000,000.00.
-            if (processPaymentCommand.PaymentRequests.ToList().Any(request => request.Amount < 1 || request.Amount > 20000000.00))
-                return hasPassedValidationCheckResult;
+            foreach(var paymentRequest in processPaymentCommand.PaymentRequests)
+            {
+                if (paymentRequest.Amount <1 || paymentRequest.Amount> 20000000.00)
+                {
+                    InternalValidationFailedPayments.Add(new InternalValidationFailedPayment() { Code = paymentRequest.Code, Name = paymentRequest.Name, Reference = paymentRequest.Reference, Amount = paymentRequest.Amount });
+                    continue;
+                }
+                PassedInternalChecksReadyToTakePayments.Add(new PassedInternalChecksReadyToTakePayment() { Code = paymentRequest.Code, Name = paymentRequest.Name, Reference = paymentRequest.Reference, Amount = paymentRequest.Amount });
+            }
 
-            hasPassedValidationCheckResult = true;
-            return hasPassedValidationCheckResult;
+            return PassedInternalChecksReadyToTakePayments;
         }
         public void AddProcessPaymentEvent(/*ProcessedPayments processedPayments*/)
         {
             //from processedPayments assign: successfulPayments, FailedPayments and FraudCheckFlaggedOnHoldManualInterventionRequiredPayments for persistance:
-            SuccessfulPayments = _processPaymentDomainCommand.PaymentRequests.Select(x => new SuccessfulPayment() { Code=x.Code, Name=x.Name, Reference=x.Reference, Amount=x.Amount }).ToList();
-
+            if(PassedInternalChecksReadyToTakePayments.Any())
+                SuccessfulPayments = this.PassedInternalChecksReadyToTakePayments.Select(x => new SuccessfulPayment() { Code=x.Code, Name=x.Name, Reference=x.Reference, Amount=x.Amount }).ToList();
+            if(InternalValidationFailedPayments.Any())
+                FailedPayments = this.InternalValidationFailedPayments.Select(x => new FailedPayment() { Code = x.Code, Name = x.Name, Reference = x.Reference, Amount = x.Amount }).ToList();
             //Raise Domain Event ProcessedPayments: (for any interested other bounded contexts that might have the requirement to build read model projections from this event (surfaced through a domain event handler with an integration event publish).
             //RaiseDomainEvent(_processedPaymentEvent);
         }

@@ -11,7 +11,6 @@ using AptBacs.PaymentProcessor.Domain.ApplicationInterfaces.ApplicationReadModel
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace AptBacs.Ui.Web.Controllers
 {
